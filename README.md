@@ -1,63 +1,17 @@
-## Trabajo Final del Primer Bimestre - Programación Orientada a Objetos
+# Proyecto de investigación y desarrollo - AAB1-25% - POO
 
-### Consideraciones Generales
+## Aplicar POO estructuras de control/datos (arreglos), y serialización de archivos
 
-- El trabajo es grupal.
-- Se debe generar una solución en UML y lenguaje de programación en Java.
-- Se ha creado un proyecto de Netbeans, en el cual existen creados paquetes y clases; con base al proyecto seguir con el desarrollo de la solución.
-- Usted debe adicionar las clases que sean necesarias.
-- Las clases deben tener los métodos respectivos por cada atributo.
-- Es importante usar métodos constructores en las clases.
-- Usted debe crear una carpeta donde se ubican los diagramas de las clases.
+* Usar el programa **DIA-UML** _(Open source)_ (u otros) para generar la representación de su solución _(modelado)_, vía diagramas de clases.
+* Genere/agregue 2 archivos _(fuente e img: \*.dia y \*.png \*.jpeg, etc)_. Titular su modelado con el nombre representativo del análisis/solución. El subDirectorio para ello es: **Modelado_UML**
+* En el subDirectorio **Solucion_Codigo** cree un único proyecto NetBeans - _Java Aplication_ (o con el IDE de su preferencia) y en él, agregue todas las clases necesarias para la solución _(use el empaquetado para aplicar el patrón arquitectónico MVC)_.  
+* Respete la arquitectura **MVC**, es decir, no implemente entradas/salidas desde/hacia teclado-consola directamente en la clase base. Los datos de entrada y resultados deben ser ingresados/mostrados desde/hacia teclado-consola, en la clase de prueba/ejecutor. No olvide el uso de paquetes para ello.
+* En el subDirectorio **Varios**, puede agregar archivos adicionales, uno de ellos corresponden a los slides para la defensa grupal y calificación individual de su solución.
+* Todos los objetos/información serán almacenados en archivos con extensión .dat
+* Aquí revise la micelanea de temas para el proyecto: [Miscelanea ejercicios Proyecto](https://utpl-my.sharepoint.com/:w:/g/personal/pdirene_utpl_edu_ec/EegcCk50vNdBtRKYDZ8TnJgBokmyOIQwYm9KSlb-Zn0aJA?rtime=TBLPEhBv3Eg)
+___
 
-
-### Problemática
-
-Se necesita realizar un sistema de gestión de una inmobiliaria. En la empresa se necesita llevar el registro de constructoras, edificios, departamentos, casas
-
-A continuación se definen algunas particularidades.
-* Una casa tiene propiedades como: propietario (nombres, apellidos, identificación; precio por metro cuadrado; número de metros cuadrados; costo final; barrio (nombre del barrio, referencia); ciudad (nombre ciudad, nombre provincia); numero de cuartos; constructora (nombre constructora, id de la empresa)
-
-* Por cada departamento se necesita: propietario (nombres, apellidos, identificación); precio por metro cuadrado; número de metros cuadrados; valor alícuota mensual; costo final; barrio (nombre del barrio, referencia); ciudad (nombre ciudad, nombre provincia); nombre de edificio; ubicación del departamento en edificio; constructora (nombre constructora, id de la empresa)
-
-
-El sistema debe permitir ingresar: propietarios; barrio; ciudades; constructoras; casas; departamentos. Además se solicita considerar lo siguiente:
-
-* Todos los objetos de tipo propietario se deben ingresar y guardar en un archivo llamado propietarios.dat
-* Todos los objetos de tipo barrio se deben ingresar y guardar en un archivo llamado barrios.dat
-* Todos los objetos de tipo ciudad se deben ingresar y guardar en un archivo llamado ciudades.dat
-* Todos los objetos de tipo constructora se deben ingresar y guardar en un archivo llamado constructoras.dat
-* Todos los objetos de tipo casa se deben ingresar y guardar en un archivo llamado casas.dat
-* Para el ingreso de una casa se debe tomar en consideración el siguiente proceso:
-	* El propietario se debe obtener del archivo propietarios.dat a través de la identificación.
-	* El barrio se debe obtener del archivo barrio.dat a través del nombre del barrio.
-	* La ciudad se debe obtener del archivo ciudades.dat a través del nombre de la ciudad.
-	* La constructora se debe obtener del archivo constructoras.dat a través del id de la empresa.
-	* El costo final es igual al número de metros * precio del metro cuadrado.
-
-* Todos los objetos de tipo departamento se deben ingresar y guardar en un archivo llamado departamentos.dat
-* Para el ingreso de un departamento se debe tomar en consideración lo siguiente:
-	* El propietario se debe obtener del archivo propietarios.dat a través de la identificación.
-	* El barrio se debe obtener del archivo barrio.dat a través del nombre del barrio.
-	* La ciudad se debe obtener del archivo ciudades.dat a través del nombre de la ciudad.
-	* La constructora se debe obtener del archivo constructoras.dat a través del id de la empresa.
-	* El costo final es igual al (número de metros * valor del metro cuadrado) + (valor alícuota mensual * 12).
-
-* Debe existir la posibilidad de listar los datos ingresados para:
-	* Propietarios
-	* Barrios
-	* Ciudades
-	* Constructoras
-	* Casas
-	* Departamentos
-
-### Herramientas a usar
-
-- Lenguaje de programación Java
-- Diagramador - DIAUML
-- Git
-- Github / GitHub-classroom
 
 ### Fecha de presentación
 
-- Semana 8 del primer bimestre
+- Semana 8 del primer bimestre.
