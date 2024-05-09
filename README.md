@@ -13,4 +13,4 @@
 ___
 
 > [!Note]
-> La fecha de presentación de su proyecto con los apartados de: Modelado, Solución y Slides (del UML, código, resultados), es en la Semana 8 del primer bimestre.
+> La fecha de presentación de su proyecto con los apartados de: Modelado, Solución y Slides _(del UML, código, resultados)_, es en la Semana 8 del primer bimestre.
