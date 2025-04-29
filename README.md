@@ -4,7 +4,7 @@
 
 * Usar el programa **DIA-UML** _(Open source)_ (u otros) para generar la representación de su solución _(modelado)_, vía diagramas de clases.
 * Genere/agregue 2 archivos _(fuente e img: \*.dia y \*.png \*.jpeg, etc)_. Titular su modelado con el nombre representativo del análisis/solución; el subDirectorio para ello es: **Modelado_UML**
-* En el subDirectorio **Solucion_Codigo** cree un único proyecto NetBeans - _Java Aplication_ (o con el IDE de su preferencia) y en él, agregue todas las clases necesarias para la solución _(use el empaquetado para aplicar el patrón arquitectónico MVC)_.  
+* En el subDirectorio **Solucion_Codigo** cree un único proyecto NetBeans - _Java Aplication_ (o con el IDE de su preferencia) y en él, agregue todas las clases necesarias para la solución _(use el empaquetado para aplicar el patrón arquitectónico MVC)_. Dentro de este mismo directorio almacene su solución Python.
 * Respete la arquitectura **MVC**, es decir, no implemente entradas/salidas desde/hacia teclado-consola directamente en las clases base _(paquetes **MC**)_. Los datos de entrada y resultados deben ser ingresados/mostrados desde/hacia teclado-consola, en la clase de prueba/ejecutor _(paquete **V**)_. No olvide el uso de paquetes para ello.
 * En el subDirectorio **Varios**, puede agregar archivos adicionales, uno de ellos corresponden a los slides para la defensa grupal y calificación individual de su solución.
 * Todos los objetos/información serán almacenados en archivos con extensión .dat, haciendo uso de la serialización de objetos.
