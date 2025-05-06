@@ -1,6 +1,6 @@
-# Proyecto de investigación y desarrollo (AAB1-25%)
+# Proyecto bimestral de investigación y desarrollo
 
-## Aplicar POO estructuras de control/datos (arreglos), y serialización de archivos
+## Aplicar POO con estructuras de control/datos (arreglos estáticos/dinámicos), y serialización de archivos
 
 * Usar el programa **DIA-UML** _(Open source)_ (u otros) para generar la representación de su solución _(modelado)_, vía diagramas de clases.
 * Genere/agregue 2 archivos _(fuente e img: \*.dia y \*.png \*.jpeg, etc)_. Titular su modelado con el nombre representativo del análisis/solución; el subDirectorio para ello es: **Modelado_UML**
