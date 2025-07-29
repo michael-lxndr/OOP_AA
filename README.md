@@ -8,7 +8,7 @@
 * Respete la arquitectura **MVC**, es decir, no implemente entradas/salidas desde/hacia teclado-consola directamente en las clases base _(paquetes **MC**)_. Los datos de entrada y resultados deben ser ingresados/mostrados desde/hacia teclado-consola, en la clase de prueba/ejecutor _(paquete **V**)_. No olvide el uso de paquetes para ello.
 * En el subDirectorio **Varios**, puede agregar archivos adicionales, uno de ellos corresponden a los slides para la defensa y calificación individual de su solución.
 * Todos los objetos/información serán almacenados en archivos y/o DB Sql para su persistencia. 
-* Aquí revise la miscelánea  de temas para el proyecto: **[Miscelanea ejercicios Proyecto.docx](https://github.com/POO-UTPL/AA_Proyecto/blob/main/Varios/Miscelanea%20ejercicios%20Proyecto%20RECUPERACION.docx)**, y elija uno de ellos. 
+* Aquí revise la miscelánea  de temas para el proyecto: **[Miscelanea ejercicios Proyecto de recuperación.docx](https://github.com/POO-UTPL/AA_Proyecto/blob/main/Varios/Miscelanea%20ejercicios%20Proyecto%20RECUPERACION.docx)**, y elija uno de ellos. 
 * Considere la rúbrica de evaluación de esta actividad, con el fin de elaborar cada componente de su solución y defensa dados los lineamientos específicos de calificación.  
 ___
 
