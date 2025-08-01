@@ -1,0 +1,254 @@
+@startuml
+
+' Paquete del Modelo (Lógica de Negocio)
+package "Modelo" {
+    class HorarioAtencion {
+        - dia: DayOfWeek
+        - horaInicio: LocalTime
+        - horaFin: LocalTime
+        + HorarioAtencion(dia: DayOfWeek, horaInicio: LocalTime, horaFin: LocalTime)
+    }
+
+    class PuntoComercial {
+        - id: int
+        - nombre: String
+        - ubicacion: String
+        - abierto: boolean
+        - cerradoPermanentemente: boolean
+        - tipoComercio: ActividadEconomica
+        - horario: List<HorarioAtencion>
+
+
+        + PuntoComercial(id: int, nombre: String, ubicacion: String, horario: List<LocalDate>, tipoComercio: comercio)
+        + verBalance(): String
+        + isAbierto(): boolean
+        + toString(): String
+    }
+
+    abstract class ActividadEconomica {
+        - tipo: String
+        - deficit: double
+        - ingresosBrutos: double
+        - ingresosNetos: double
+        - recursosAVG: double
+        - abierto: boolean
+        - estaCerradoPermanentemente: boolean
+        - recursos: List<Recurso>
+
+        + ActividadEconomica(tipo: String)
+        + <<*>>calcularRentabilidad(): double
+        + <<*>>calcularGananciaNeta(): double
+        + <<*>>calcularEficiencia(): double
+        + setRecursos(recursos: List<Recurso>): void
+        + setAbierto(abierto: boolean): void
+        + setCerradoPermanentemente(cerrado: boolean): void
+        + getTipo(): String
+        + getAbierto(): boolean
+        + serCerradoPermanentemente(): boolean
+        + toString(): String
+    }
+
+    class FeriaItinerante extends ActividadEconomica{
+        - ubicacionesPasadas: List<String>
+        - ubicacionesFuturas: List<String>
+        - responsables: List<Responsable>
+        - puestos: List<NegocioBase>
+
+        + FeriaItinerante(tipo: String, costoTransporte: Recurso, costoInstalacion: Recurso, responsables: List<Responsable>)
+        + setPuestos(puestos: List<NegocioBase>, admin: Responsable): void
+        + setPuesto(puesto: NegocioBase, admin: Responsable): void
+        + getPuestos(): List<NegocioBase>
+        + calcularRentabilidad(): double
+        + calcularGananciaNeta(): double
+        + calcularEficiencia(): double
+        + toString(): String
+    }
+
+    class MercadoFijo extends ActividadEconomica{
+        - idPuesto: int
+        - numeroPuestos: int
+        - costoEspacio: double
+        - rotacionProductos: double
+        - costoMantenimieto: Recurso
+        - responsables: List<Responsable>
+        - puestos: List<NegocioBase>
+
+        + MercadoFijo(costoEspacio: double, rotacionProductos: double, numeroPuestos: int, responsables: List<Responsable>)
+        + setPuestos(puestos: List<NegocioBase>, admin: Responsable): void
+        + setPuesto(puesto: NegocioBase, admin: Responsable): void
+        + getPuestos(): List<NegocioBase>
+        + calcularRentabilidad(): double
+        + calcularGananciaNeta(): double
+        + calcularEficiencia(): double
+        + toString(): String
+    }
+
+    class Recurso {
+        - descripcion: String
+        - costo: double
+
+        + Recurso(descripcion: String, costo: double)
+        + toString(): String
+    }
+
+    abstract class TiendaLocal extends ActividadEconomica{
+        - owner: Responsable
+        - vendedor: Vendedor
+        - costoReabastecer: double
+        - inventarioPermanente: List<Producto>
+        - inventarioReabastecer: List<Producto>
+
+        + TiendaLocal(inventarioPermanente: List<Producto>, owner: Responsable, vendedor: Vendedor)
+        + calcularInventarioTotal(): double
+        + calcularEficiencia(): double
+        + mostrarInventario (): String
+        + vender(vendedor: Vendedor, producto: producto): void
+        + calcularRentabilidad(): double
+        + calcularGananciaNeta(): double
+        + calcularEficiencia(): double
+        + toString(): String
+    }
+
+    class NegocioBase extends TiendaLocal{
+        - numeroDePuesto: int
+
+        + NegocioBase(inventarioPermanente: List<Producto>, owner: Responsable, vendedor: Vendedor)
+        + calcularRentabilidad(): double
+        + calcularGananciaNeta(): double
+        + calcularEficiencia(): double
+        + calcularInventarioTotal(): double
+        + calcularEficiencia(): double
+        + mostrarInventario (): String
+        + vender(vendedor: Vendedor, producto: producto): void
+        + getNumeroDePuesto(): int
+        + setNumeroDePuesto(): int
+        + toString(): String
+    }
+
+
+    class Producto extends Recurso{
+        - id: int
+        - nombre: String
+        - pvp: double
+        - stock: int
+
+        + Producto(id: int, nombre: String, pvp: double, costo: double, stock: int)
+        + setPVP(): double
+        + vender(cantidad: int): void
+        + toString(): String
+    }
+
+    abstract Persona {
+        - id: int
+        - nombre: String
+
+        + Persona(id: int, nombre: String,)
+        + setEstado(): void
+        + toString(): String
+    }
+
+
+    abstract Vendedor extends Persona{
+
+        - ventas: List<Venta>
+
+        + Vendedor(id: int, nombre: String, estado: boolean, responsabilidad: String)
+        + registrarVenta(): void
+        + toString(): String
+    }
+
+    class Responsable extends Vendedor{
+        - cargo: String
+        - responsabilidad: PuntoComercial
+        - vendedoresACargo: List<Vendedor>
+        + Responsable(id: int, nombre: String, condition: String)
+        + setResponsabilidad(): void
+        + supervisar(): void
+        + setResponsabilidad():void
+    }
+
+
+
+    class Venta {
+        - producto: Producto
+        - vendedor: Vendedor
+        - cantidad: int
+        - fecha: Date
+
+        + Venta(producto: Producto, cantidad: int, fecha: Date)
+        + calcularTotal(): double
+        + vender(): void
+        + toString(): String
+    }
+
+    class Jornada {
+        - fecha: Date
+        - punto: PuntoComercial
+        - ventas: List<Venta>
+        + simular(): void
+        + totalIngresos(): double
+    }
+
+
+
+
+    ' Relaciones
+    PuntoComercial "1" o-- "1..*" ActividadEconomica: tiene >
+    PuntoComercial "1" o-- "1..*" HorarioAtencion: tiene un >
+    Venta "1" o-- "1" Producto : registra >
+    ActividadEconomica "1" o-- "0..*" Recurso : usa >
+    FeriaItinerante "1" *-- "1" Responsable: tiene un >
+    Vendedor "1" o-- "0..*" Venta : realiza una >
+    NegocioBase "1" *-- "1..*" Producto : contiene >
+    NegocioBase "1" o-- "0..*" Venta : realiza una >
+    NegocioBase "1" o-- "1..*" Vendedor : tiene >
+    FeriaItinerante "1" o-- "0..*" NegocioBase : contiene puestos >
+    MercadoFijo "0..*" o-- "0..*" Recurso: usa >
+    MercadoFijo "0..*" *-- "1..*" Responsable: tiene >
+    MercadoFijo "0..*" o-- "0..*" NegocioBase: tiene >
+
+}
+
+' Paquete de Controladores
+package "Controladores" {
+    class ComercioController {
+        + registrarPuntoComercial(): void
+        + simularActividad(): void
+        + generarReporte(): void
+    }
+
+    class DBController {
+        + guardarEnDB(): void
+        + cargarDesdeDB(): void
+    }
+
+    class ProductoController {
+        + registrarProducto(): void
+        + actualizarStock(): void
+    }
+
+    class ArchivoController {
+        + cargarDesdeCSV(path: String): void
+    }
+
+    ComercioController ..> PuntoComercial : usa >
+    ComercioController ..> ActividadEconomica : simula una >
+    ProductoController ..> Producto : administra >
+    ArchivoController ..> Producto : importa >
+    DBController ..> PuntoComercial : persiste >
+
+
+}
+
+' Paquete de Vista (Interfaz de Usuario)
+package "Vista" {
+    class ConsolaUI {
+        + mostrarMenu(): void
+        + mostrarReporte(): void
+    }
+
+    ConsolaUI ..> ComercioController : controla >
+    ConsolaUI ..> ProductoController : administra >
+    ConsolaUI ..> ArchivoController : importa >
+}
+@enduml
