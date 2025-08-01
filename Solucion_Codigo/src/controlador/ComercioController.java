@@ -1,7 +1,6 @@
 package controlador;
 
-import modelo.PuntoComercial;
-import modelo.ActividadEconomica;
+import modelo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +14,22 @@ public class ComercioController {
 
     public void registrarPuntoComercial(PuntoComercial punto) {
         puntos.add(punto);
-        System.out.println("Punto comercial registrado: " + punto.getTipoComercio().getTipo());
     }
 
     public void simularActividad() {
-        for (PuntoComercial punto : puntos) {
-            ActividadEconomica act = punto.getTipoComercio();
-            System.out.println("Rentabilidad de " + act.getTipo() + ": " + act.calcularRentabilidad());
+        for (PuntoComercial pc : puntos) {
+            System.out.println("Simulando: " + pc);
+            System.out.println("Ganancia neta: $" + pc.getTipoComercio().calcularGananciaNeta());
+            System.out.println("Eficiencia: " + pc.getTipoComercio().calcularEficiencia() + "%\n");
         }
     }
 
     public void generarReporte() {
-        for (PuntoComercial punto : puntos) {
-            System.out.println(punto.verBalance());
+        for (PuntoComercial pc : puntos) {
+            System.out.println(pc);
+            pc.getVendedores().forEach(System.out::println);
+            pc.getProductos().forEach(System.out::println);
+            System.out.println();
         }
     }
 

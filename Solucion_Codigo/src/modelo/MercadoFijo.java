@@ -3,51 +3,31 @@ package modelo;
 import java.util.List;
 
 public class MercadoFijo extends ActividadEconomica {
-    private int numeroPuestos;
     private double costoEspacio;
     private double rotacionProductos;
-    private Recurso costoMantenimiento;
-    private List<Responsable> responsables;
-    private List<NegocioBase> puestos;
 
-    public MercadoFijo(double costoEspacio, double rotacionProductos, int numeroPuestos, List<Responsable> responsables) {
-        super("MercadoFijo");
+    public MercadoFijo(String tipo, List<Recurso> recursos, double costoEspacio, double rotacionProductos) {
+        super(tipo, recursos);
         this.costoEspacio = costoEspacio;
         this.rotacionProductos = rotacionProductos;
-        this.numeroPuestos = numeroPuestos;
-        this.responsables = responsables;
-    }
-
-    public void setPuestos(List<NegocioBase> puestos, Responsable admin) {
-        this.puestos = puestos;
-        if (!responsables.contains(admin)) {
-            responsables.add(admin);
-        }
-    }
-
-    public void setPuesto(NegocioBase puesto, Responsable admin) {
-        this.puestos.add(puesto);
-        if (!responsables.contains(admin)) {
-            responsables.add(admin);
-        }
-    }
-
-    public List<NegocioBase> getPuestos() {
-        return puestos;
-    }
-
-    @Override
-    public double calcularRentabilidad() {
-        return ingresosNetos - (numeroPuestos * costoEspacio);
     }
 
     @Override
     public double calcularGananciaNeta() {
-        return ingresosBrutos - costoMantenimiento.getCosto();
+        double ingresos = recursos.stream().mapToDouble(Recurso::getIngreso).sum();
+        double costos = recursos.stream().mapToDouble(Recurso::getCosto).sum();
+        return ingresos - (costos + costoEspacio);
     }
 
     @Override
     public double calcularEficiencia() {
-        return rotacionProductos * 100;
+        return rotacionProductos; // Puede ser reinterpretado como métrica de eficiencia
+    }
+
+    @Override
+    public String toString() {
+        return "Mercado Fijo - " + super.toString() +
+               ", Costo Espacio: $" + costoEspacio +
+               ", Rotación: " + rotacionProductos;
     }
 }

@@ -2,64 +2,40 @@ package controlador;
 
 import modelo.Producto;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArchivoController {
 
-    public void cargarDesdeCSV(String path, List<Producto> productos) {
-        try {
-            if (path == null || path.isBlank()) {
-                // Detectar la carpeta desde donde se ejecuta el Main
-                String basePath = Paths.get(ArchivoController.class.getProtectionDomain()
-                        .getCodeSource().getLocation().toURI()).getParent().getParent().getParent().toString();
-
-                path = basePath + File.separator + "src" + File.separator + "productos.csv";
-                System.out.println("ℹ️ Usando ruta desde src: " + path);
+    public void guardarProductos(String path, List<Producto> productos) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(path))) {
+            for (Producto p : productos) {
+                writer.println(p.getId() + "," + p.getNombre() + "," + p.getPrecio() + "," + p.getCosto() + "," + p.getStock());
             }
-
-            File archivo = new File(path);
-            if (!archivo.exists()) {
-                System.out.println("❌ Archivo no encontrado: " + archivo.getAbsolutePath());
-                return;
-            }
-
-            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-                String linea;
-                boolean primera = true;
-
-                while ((linea = br.readLine()) != null) {
-                    if (primera) {
-                        primera = false; // ignorar encabezado
-                        continue;
-                    }
-
-                    String[] datos = linea.split(",");
-                    if (datos.length != 5) {
-                        System.out.println("❗ Línea inválida: " + linea);
-                        continue;
-                    }
-
-                    int id = Integer.parseInt(datos[0].trim());
-                    String nombre = datos[1].trim();
-                    double pvp = Double.parseDouble(datos[2].trim());
-                    double costo = Double.parseDouble(datos[3].trim());
-                    int stock = Integer.parseInt(datos[4].trim());
-
-                    productos.add(new Producto(id, nombre, pvp, costo, stock));
-                }
-
-                System.out.println("✅ Productos cargados correctamente.");
-
-            }
-
-        } catch (IOException | NumberFormatException | URISyntaxException e) {
-            System.out.println("❌ Error al procesar el archivo: " + e.getMessage());
+            System.out.println("Productos guardados en: " + path);
+        } catch (IOException e) {
+            System.err.println("Error al guardar productos: " + e.getMessage());
         }
+    }
+
+    public List<Producto> cargarProductos(String path) {
+        List<Producto> productos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] datos = linea.split(",");
+                int id = Integer.parseInt(datos[0]);
+                String nombre = datos[1];
+                double precio = Double.parseDouble(datos[2]);
+                double costo = Double.parseDouble(datos[3]);
+                int stock = Integer.parseInt(datos[4]);
+                productos.add(new Producto(id, nombre, precio, costo, stock));
+            }
+            System.out.println("Productos cargados desde: " + path);
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Error al cargar productos: " + e.getMessage());
+        }
+        return productos;
     }
 }

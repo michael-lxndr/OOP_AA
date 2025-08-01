@@ -2,30 +2,30 @@ package modelo;
 
 import java.util.List;
 
-public abstract class TiendaLocal extends ActividadEconomica {
-    protected Responsable owner;
-    protected Vendedor vendedor;
-    protected double costoReabastecer;
-    protected List<Producto> inventarioPermanente;
-    protected List<Producto> inventarioReabastecer;
+public class TiendaLocal extends ActividadEconomica {
+    private List<Producto> inventarioPermanente;
 
-    public TiendaLocal(List<Producto> inventarioPermanente, Responsable owner, Vendedor vendedor) {
-        super("TiendaLocal");
+    public TiendaLocal(String tipo, List<Recurso> recursos, List<Producto> inventarioPermanente) {
+        super(tipo, recursos);
         this.inventarioPermanente = inventarioPermanente;
-        this.owner = owner;
-        this.vendedor = vendedor;
     }
 
-    public double calcularInventarioTotal() {
-        return inventarioPermanente.size() + inventarioReabastecer.size();
+    @Override
+    public double calcularGananciaNeta() {
+        double ingresos = inventarioPermanente.stream().mapToDouble(p -> p.getPrecio() * p.getStock()).sum();
+        double costos = inventarioPermanente.stream().mapToDouble(p -> p.getCosto() * p.getStock()).sum();
+        return ingresos - costos;
     }
 
-    public String mostrarInventario() {
-        return inventarioPermanente.toString();
+    @Override
+    public double calcularEficiencia() {
+        int vendidos = inventarioPermanente.stream().mapToInt(Producto::getVendidos).sum();
+        int disponibles = inventarioPermanente.stream().mapToInt(Producto::getStock).sum();
+        return disponibles == 0 ? 0 : (vendidos / (double) disponibles) * 100;
     }
 
-    public void vender(Vendedor vendedor, Producto producto) {
-        vendedor.registrarVenta(new Venta(producto, vendedor, 1, new java.util.Date()));
-        producto.vender(1);
+    @Override
+    public String toString() {
+        return "Tienda Local - " + super.toString();
     }
 }

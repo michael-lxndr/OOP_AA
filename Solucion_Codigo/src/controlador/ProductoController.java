@@ -9,22 +9,21 @@ public class ProductoController {
     private List<Producto> productos;
 
     public ProductoController() {
-        productos = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
-    public void registrarProducto(Producto p) {
-        productos.add(p);
+    public void registrarProducto(Producto producto) {
+        productos.add(producto);
     }
 
     public void actualizarStock(int id, int nuevoStock) {
         for (Producto p : productos) {
             if (p.getId() == id) {
-                // Este método debe estar implementado en Producto
-                System.out.println("Stock actualizado para producto: " + p);
-                return;
+                System.out.println("Actualizando stock de: " + p.getNombre());
+                // NOTA: en este diseño el stock se manipula directamente desde Producto
+                break;
             }
         }
-        System.out.println("Producto no encontrado.");
     }
 
     public List<Producto> getProductos() {

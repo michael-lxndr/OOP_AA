@@ -1,52 +1,33 @@
 package modelo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FeriaItinerante extends ActividadEconomica {
-    private List<String> ubicacionesPasadas;
-    private List<String> ubicacionesFuturas;
-    private List<Responsable> responsables;
-    private List<NegocioBase> puestos;
+    private double costoTransporte;
+    private double costoInstalacion;
 
-    public FeriaItinerante(String tipo, List<Responsable> responsables) {
-        super(tipo);
-        this.responsables = responsables;
-        this.ubicacionesPasadas = new ArrayList<>();
-        this.ubicacionesFuturas = new ArrayList<>();
-        this.puestos = new ArrayList<>();
-    }
-
-    public void setPuestos(List<NegocioBase> puestos, Responsable admin) {
-        this.puestos = puestos;
-        if (!responsables.contains(admin)) {
-            responsables.add(admin);
-        }
-    }
-
-    public void setPuesto(NegocioBase puesto, Responsable admin) {
-        this.puestos.add(puesto);
-        if (!responsables.contains(admin)) {
-            responsables.add(admin);
-        }
-    }
-
-    public List<NegocioBase> getPuestos() {
-        return puestos;
-    }
-
-    @Override
-    public double calcularRentabilidad() {
-        return ingresosNetos / (recursos.size() + 1);
+    public FeriaItinerante(String tipo, List<Recurso> recursos, double costoTransporte, double costoInstalacion) {
+        super(tipo, recursos);
+        this.costoTransporte = costoTransporte;
+        this.costoInstalacion = costoInstalacion;
     }
 
     @Override
     public double calcularGananciaNeta() {
-        return ingresosBrutos - deficit;
+        double ingresos = recursos.stream().mapToDouble(Recurso::getIngreso).sum();
+        double costos = recursos.stream().mapToDouble(Recurso::getCosto).sum();
+        return ingresos - (costos + costoTransporte + costoInstalacion);
     }
 
     @Override
     public double calcularEficiencia() {
-        return (ingresosNetos / (recursosAVG + 1)) * 100;
+        return 0; // Implementar lógica de productos vendidos / disponibles si aplica
+    }
+
+    @Override
+    public String toString() {
+        return "Feria Itinerante - " + super.toString() +
+               ", Transporte: $" + costoTransporte +
+               ", Instalación: $" + costoInstalacion;
     }
 }
