@@ -25,6 +25,7 @@ public class ConsolaUI {
             System.out.println("4. Generar reporte");
             System.out.println("5. Guardar productos en CSV");
             System.out.println("6. Cargar productos desde CSV");
+            System.out.println("7. Ver productos por punto comercial");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = scanner.nextInt();
@@ -40,6 +41,7 @@ public class ConsolaUI {
                     List<Producto> cargados = archivoController.cargarProductos("productos.csv");
                     cargados.forEach(productoController::registrarProducto);
                 }
+                case 7 -> verProductosPorComercio();
                 case 0 -> System.out.println("Saliendo del sistema...");
                 default -> System.out.println("Opción inválida.");
             }
@@ -117,4 +119,24 @@ public class ConsolaUI {
         comercioController.registrarPuntoComercial(punto);
         System.out.println("Punto comercial registrado.\n");
     }
+
+    private void verProductosPorComercio() {
+        List<PuntoComercial> puntos = comercioController.getPuntos();
+        if (puntos.isEmpty()) {
+            System.out.println("No hay puntos comerciales registrados.\n");
+            return;
+        }
+
+        System.out.println("\n=== PRODUCTOS POR PUNTO COMERCIAL ===");
+        for (PuntoComercial pc : puntos) {
+            System.out.println("[" + pc.getId() + "] " + pc.getNombre() + " - " + pc.getTipoComercio().getClass().getSimpleName());
+            if (pc.getProductos().isEmpty()) {
+                System.out.println("  (Sin productos registrados)");
+            } else {
+                pc.getProductos().forEach(producto -> System.out.println("  - " + producto));
+            }
+            System.out.println();
+        }
+    }
+
 }
